@@ -7,12 +7,12 @@ terremotos = [
     {"magnitud": 4.2, "profundidad": 35},
     {"magnitud": 6.1, "profundidad": 70}
 ]
-#Categoria por terremotos
+
 def categoriater():
     fuerte = 0
     moderado = 0
     leve = 0 
-    for terremoto in terremotos:
+    for terremoto in terremotos: 
         magnitud = terremoto["magnitud"]
         if magnitud < 4:
             leve += 1
@@ -20,22 +20,28 @@ def categoriater():
             moderado += 1
         else:
             fuerte += 1
-    mylabels = ["Leves <4", "Moderados 4-6", "Fuertes >6"]
-    y = np.array([leve, moderado, fuerte])
+    mylabels = ["Leves <4", "Moderados 4-6", "Fuertes >6"] 
+    y = np.array([leve, moderado, fuerte]) 
 
     ahora = datetime.now()
-    nombre = ahora.strftime("%Y-%m-%d-%H-%M")
+    tiempo = ahora.strftime("%Y-%m-%d-%H-%M")
 
     plt.pie(y, labels=mylabels, autopct='%1.1f%%')
     plt.title("Categoría de terremotos")
 
-    plt.savefig(f"proyecto/Graficas/grafica_{nombre}.png")
+    ruta= f"proyecto/Graficas/grafica_categoria_{tiempo}.png"
+    try:
+        plt.savefig(ruta)
+    except Exception as no:
+        print("Error al guardar la gráfica:", no)
+
+
     plt.show()
 
 
 categoriater()
 
-#Cantidad de terremotos por magnitud
+#Cantidad de terremotos por magnitud exacta
 def cuantos_terremotos():
         rango02 = 0
         rango23 = 0
@@ -59,34 +65,45 @@ def cuantos_terremotos():
         plt.bar(x, y)
     
         ahora = datetime.now()
-        nombre = ahora.strftime("%Y-%m-%d-%H-%M")
+        tiempo = ahora.strftime("%Y-%m-%d-%H-%M")
 
         plt.xlabel("Rango de magnitud")
         plt.ylabel("Cantidad")
         plt.title("Cantidad de terremotos por magnitud")
-        plt.savefig(f"proyecto/Graficas/grafica_{nombre}.png")
+        ruta= f"proyecto/Graficas/grafica_cantidadt_{tiempo}.png"
+        try:
+            plt.savefig(ruta)
+        except Exception as no:
+            print("Error al guardar la gráfica:", no)
+
         plt.show()
 cuantos_terremotos()
 
-#Magnitud y Profundidad
+#Grafica de dispersion 
 def magvspro():
     magnitudes = []
     profundidades = []
 
     for terremoto in terremotos:
-        magnitudes.append(terremoto["magnitud"])
+        magnitudes.append(terremoto["magnitud"]) 
         profundidades.append(terremoto["profundidad"])
 
     ahora = datetime.now()
-    nombre = ahora.strftime("%Y-%m-%d-%H-%M")
+    tiempo = ahora.strftime("%Y-%m-%d-%H-%M")
 
     plt.scatter(magnitudes, profundidades)
 
     plt.xlabel("Magnitud")
     plt.ylabel("Profundidad")
-    plt.title("Magnitud y su Profundidad")
+    plt.title("Magnitud vs Profundidad")
 
-    plt.savefig(f"proyecto/Graficas/grafica_{nombre}.png")
+    ruta= f"proyecto/Graficas/grafica_mgpro_{tiempo}.png"
+    try:
+        plt.savefig(ruta)
+    except Exception as no:
+        print("Error al guardar la gráfica:", no)
+        
     plt.show()
+    
 
 magvspro()

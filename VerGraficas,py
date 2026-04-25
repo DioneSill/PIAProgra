@@ -68,7 +68,7 @@ def cuantos_terremotos():
         plt.show()
 cuantos_terremotos()
 
-#Magnitud vs Profundidad
+#Magnitud y Profundidad
 def magvspro():
     magnitudes = []
     profundidades = []
@@ -84,7 +84,7 @@ def magvspro():
 
     plt.xlabel("Magnitud")
     plt.ylabel("Profundidad")
-    plt.title("Magnitud vs Profundidad")
+    plt.title("Magnitud y su Profundidad")
 
     plt.savefig(f"proyecto/Graficas/grafica_{nombre}.png")
     plt.show()

@@ -1,0 +1,92 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from datetime import datetime
+
+terremotos = [
+    {"magnitud": 2.5, "profundidad": 10},
+    {"magnitud": 4.2, "profundidad": 35},
+    {"magnitud": 6.1, "profundidad": 70}
+]
+#Categoria por terremotos
+def categoriater():
+    fuerte = 0
+    moderado = 0
+    leve = 0 
+    for terremoto in terremotos:
+        magnitud = terremoto["magnitud"]
+        if magnitud < 4:
+            leve += 1
+        elif 4 <= magnitud < 6:
+            moderado += 1
+        else:
+            fuerte += 1
+    mylabels = ["Leves <4", "Moderados 4-6", "Fuertes >6"]
+    y = np.array([leve, moderado, fuerte])
+
+    ahora = datetime.now()
+    nombre = ahora.strftime("%Y-%m-%d-%H-%M")
+
+    plt.pie(y, labels=mylabels, autopct='%1.1f%%')
+    plt.title("Categoría de terremotos")
+
+    plt.savefig(f"proyecto/Graficas/grafica_{nombre}.png")
+    plt.show()
+
+
+categoriater()
+
+#Cantidad de terremotos por magnitud
+def cuantos_terremotos():
+        rango02 = 0
+        rango23 = 0
+        rango34 = 0
+        rango45 = 0
+        rango56 = 0
+        for terremoto in terremotos:
+            magnitud = terremoto["magnitud"]
+            if 0 <= magnitud < 2:
+                rango02 += 1  
+            elif 2 <= magnitud < 3:
+             rango23 += 1
+            elif 3<= magnitud < 4:
+                rango34 += 1
+            elif 4 <= magnitud < 5:
+                rango45 += 1
+            else:
+                rango56 += 1
+        x = ["0-2","2-3","3-4","5-6"]
+        y = [rango02, rango23, rango34, rango56]
+        plt.bar(x, y)
+    
+        ahora = datetime.now()
+        nombre = ahora.strftime("%Y-%m-%d-%H-%M")
+
+        plt.xlabel("Rango de magnitud")
+        plt.ylabel("Cantidad")
+        plt.title("Cantidad de terremotos por magnitud")
+        plt.savefig(f"proyecto/Graficas/grafica_{nombre}.png")
+        plt.show()
+cuantos_terremotos()
+
+#Magnitud vs Profundidad
+def magvspro():
+    magnitudes = []
+    profundidades = []
+
+    for terremoto in terremotos:
+        magnitudes.append(terremoto["magnitud"])
+        profundidades.append(terremoto["profundidad"])
+
+    ahora = datetime.now()
+    nombre = ahora.strftime("%Y-%m-%d-%H-%M")
+
+    plt.scatter(magnitudes, profundidades)
+
+    plt.xlabel("Magnitud")
+    plt.ylabel("Profundidad")
+    plt.title("Magnitud vs Profundidad")
+
+    plt.savefig(f"proyecto/Graficas/grafica_{nombre}.png")
+    plt.show()
+
+magvspro()
